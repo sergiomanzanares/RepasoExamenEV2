@@ -19,9 +19,12 @@ public class MainActivity extends AppCompatActivity {
     EditText pass, nombre;
     Button btn;
     UsuarioViewModel uvm;
+    TokenViewModel tvm;
     List<User> listaUsuarios;
     User usuario;
     TextView tv;
+
+    //public static String token;
 
 
     @Override
@@ -44,6 +47,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        tvm = new ViewModelProvider(this).get(TokenViewModel.class);
+
+        tvm.getToken().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                token = s;
+            }
+        });
+        */
+        
         nombre = findViewById(R.id.ETNombre);
         pass = findViewById(R.id.ETPassword);
         btn = findViewById(R.id.btnComprobar);

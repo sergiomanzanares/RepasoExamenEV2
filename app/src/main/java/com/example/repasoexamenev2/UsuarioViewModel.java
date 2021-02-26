@@ -2,9 +2,13 @@ package com.example.repasoexamenev2;
 
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStore;
 
 import java.util.List;
 
@@ -34,18 +38,19 @@ public class UsuarioViewModel extends ViewModel {
 
         ApiService service = retrofit.create(ApiService.class);
 
-        Call<List<User>> repo = service.listaUsuarios();
+        //Call<List<User>> repo = service.listaUsuarios(MainActivity.token);
+        Call<List<User>> repo = service.listaUsuarios("bgy6ujhydrj7dr6");
 
         repo.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 usuarios.postValue(response.body());
-                Log.d("acceso", "concedido");
+                Log.d("datos", "obtenidos");
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                Log.d("acceso", t.getMessage());
+                Log.d("datos", t.getMessage());
             }
         });
 
